@@ -4,8 +4,7 @@ const app = express();
 const PORT = 4000;
 
 app.get("/", (req, res) => {
-  res.setHeader("Content-Type", "text/html");
-  res.send("hello world");
+  res.send("<html><body><h1>Hello, World!</h1></body></html>");
 });
 
 const start = async () => {
