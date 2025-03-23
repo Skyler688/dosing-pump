@@ -32,7 +32,7 @@ port.on("open", () => {
 });
 
 port.on("error", (err) => {
-  console.log("Error opening serial port:", err.massage);
+  console.log("Error opening serial port:", err.message);
 });
 
 const sendToArduino = (req, res, next) => {
