@@ -17,7 +17,7 @@ port.on("open", () => {
   console.log("Serial Port Connected");
 });
 
-port.on("error", () => {
+port.on("error", (err) => {
   console.log("Error opening serial port:", err.massage);
 });
 
