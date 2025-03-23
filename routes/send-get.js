@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-const {
-  // controler functions
-  createLog,
-} = require("../controllers/logs");
+// controler functions
+const { createLog } = require("../controllers/logs");
 
-router.route("/log").post(createLog);
+// arduino serial functions
+const sendToArduino = require("../serial/connect");
+
+router.route("/log").post(sendToArduino, createLog);
 
 module.exports = router;
