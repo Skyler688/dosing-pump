@@ -1,7 +1,21 @@
 const { SerialPort } = require("serialport");
 const path = require("path");
 
-// const portPath = "/dev/cu.usbmodem143101"; // development machine port
+SerialPort.list()
+  .then((ports) => {
+    console.log("avalable serial ports:");
+    ports.forEach((port) => {
+      console.log(`Path: ${port.path}, Manufaturer: ${port.manufacturer}`);
+    });
+  })
+  .catch((err) => {
+    console.error("Error listing ports");
+  });
+
+// development machine port
+// const portPath = "/dev/cu.usbmodem143101";
+
+// server port
 const portPath = "/dev/ttyACM0";
 
 const port = new SerialPort({
