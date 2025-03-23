@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const URL = "http://192.168.1.58:4000";
-  //   const URL = "http://localhost:4000";
+  //   const URL = "http://192.168.1.58:4000";
+  const URL = "http://localhost:4000";
 
   const button = document.getElementById("button");
 
