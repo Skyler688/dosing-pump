@@ -1,21 +1,39 @@
 require("dotenv").config();
 
-const connectDB = require("./data_base/connect");
-const router = require("./routes/send-get");
-const { notFound } = require("./middleware/error-handler");
-
 const express = require("express");
 const path = require("path");
+const session = require("express-session");
 const app = express();
 const PORT = 4000;
 
+const connectDB = require("./data_base/connect");
+const dataBaseRouter = require("./routes/data-base");
+const esp32Router = require("./routes/esp32");
+const viewsRouter = require("./routes/user");
+const { notFound } = require("./middleware/error-handler");
+
 // middleware
+app.use(express.urlencoded({ extended: true }));
+
 app.use(express.json());
-// use all static files in public dir.
+
+app.use(
+  session({
+    secret: "buck is a good dogo",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
 app.use(express.static(path.join(__dirname, "public")));
 
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+
 // routes
-app.use(router);
+app.use("/", viewsRouter);
+app.use("/data", dataBaseRouter);
+app.use("/esp32", esp32Router);
 
 // route error middleware not found
 app.use(notFound);
